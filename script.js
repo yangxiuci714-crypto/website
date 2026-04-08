@@ -1,0 +1,106 @@
+/* ===== Apple-style scroll-driven animations ===== */
+
+// Easing: smooth deceleration like Apple uses
+function easeOutQuart(t) {
+  return 1 - Math.pow(1 - t, 4);
+}
+
+// All elements to animate — sections and their children
+const animEls = [];
+
+function registerElements() {
+  // Sections animate as a whole
+  document.querySelectorAll('.section-header, .about-text, .school-block').forEach((el, i) => {
+    animEls.push({ el, delay: i * 0.04, type: 'rise' });
+  });
+
+  // CV rows stagger within their section
+  document.querySelectorAll('.cv-row').forEach((el, i) => {
+    animEls.push({ el, delay: i * 0.05, type: 'rise' });
+  });
+
+  // Highlight boxes
+  document.querySelectorAll('.highlight-box').forEach((el, i) => {
+    animEls.push({ el, delay: i * 0.06, type: 'rise-small' });
+  });
+
+  // Cards pop with scale
+  document.querySelectorAll('.card').forEach((el, i) => {
+    animEls.push({ el, delay: i * 0.07, type: 'pop' });
+  });
+
+  // Social cards slide in
+  document.querySelectorAll('.social-card').forEach((el, i) => {
+    animEls.push({ el, delay: i * 0.08, type: 'slide' });
+  });
+
+  // Set initial hidden state
+  animEls.forEach(({ el }) => {
+    el.style.willChange = 'opacity, transform';
+  });
+}
+
+function tick() {
+  const vh = window.innerHeight;
+
+  animEls.forEach(({ el, delay, type }) => {
+    const rect = el.getBoundingClientRect();
+
+    // Progress: 0 = element just entering from bottom, 1 = element fully in view
+    const triggerStart = vh * 0.96;
+    const triggerEnd   = vh * 0.15;
+    const rawProgress  = (triggerStart - rect.top) / (triggerStart - triggerEnd);
+    const progress     = Math.min(1, Math.max(0, rawProgress - delay));
+    const p            = easeOutQuart(progress);
+
+    if (type === 'rise') {
+      el.style.opacity   = p;
+      el.style.transform = `translateY(${(1 - p) * 52}px) scale(${0.95 + 0.05 * p})`;
+    } else if (type === 'rise-small') {
+      el.style.opacity   = p;
+      el.style.transform = `translateY(${(1 - p) * 24}px)`;
+    } else if (type === 'pop') {
+      el.style.opacity   = p;
+      el.style.transform = `translateY(${(1 - p) * 60}px) scale(${0.92 + 0.08 * p})`;
+    } else if (type === 'slide') {
+      el.style.opacity   = p;
+      el.style.transform = `translateX(${(1 - p) * -32}px)`;
+    }
+  });
+
+  requestAnimationFrame(tick);
+}
+
+registerElements();
+requestAnimationFrame(tick);
+
+/* ===== Floating navbar active state ===== */
+const sections  = document.querySelectorAll('section[id]');
+const navLinks  = document.querySelectorAll('.navbar a');
+
+const sectionObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      navLinks.forEach(l => {
+        l.classList.toggle('active', l.getAttribute('href') === `#${entry.target.id}`);
+      });
+    }
+  });
+}, { threshold: 0.3 });
+
+sections.forEach(s => sectionObserver.observe(s));
+
+/* ===== Theme toggle ===== */
+const toggle = document.querySelector('.theme-toggle');
+const root   = document.documentElement;
+
+// Load saved preference or default to dark
+const saved = localStorage.getItem('theme') || 'dark';
+root.setAttribute('data-theme', saved);
+
+toggle.addEventListener('click', () => {
+  const current = root.getAttribute('data-theme') || 'dark';
+  const next    = current === 'dark' ? 'light' : 'dark';
+  root.setAttribute('data-theme', next);
+  localStorage.setItem('theme', next);
+});
