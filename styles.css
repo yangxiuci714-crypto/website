@@ -625,13 +625,21 @@ a:hover { color: var(--text); }
   margin-bottom: 0.75rem;
 }
 
-.blog-read {
+.blog-btn {
+  display: inline-block;
   font-size: 12px;
   font-weight: 500;
   color: var(--accent);
-  transition: transform 0.2s;
+  background: var(--accent-tag-bg);
+  border: 1px solid var(--accent-tag-border);
+  border-radius: 8px;
+  padding: 0.45rem 1.1rem;
+  transition: background 0.2s, border-color 0.2s, transform 0.2s;
+  width: fit-content;
 }
-.blog-card:hover .blog-read {
+.blog-card:hover .blog-btn {
+  background: var(--accent-tag-hover-bg);
+  border-color: var(--accent-tag-hover-border);
   transform: translateX(4px);
 }
 
@@ -723,6 +731,54 @@ a:hover { color: var(--text); }
   font-size: 13px;
   color: var(--muted);
   letter-spacing: -0.01em;
+}
+
+/* ===== Collapsible sections ===== */
+.collapse-wrap {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.45s ease, opacity 0.35s ease;
+  opacity: 0;
+}
+.collapse-wrap.expanded {
+  opacity: 1;
+}
+
+.collapse-text {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, opacity 0.3s ease;
+  opacity: 0;
+  margin-bottom: 0 !important;
+}
+.collapse-text.expanded {
+  opacity: 1;
+  margin-bottom: 0.75rem !important;
+}
+
+.show-more-btn {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 500;
+  font-family: var(--sans);
+  color: var(--accent);
+  background: var(--accent-tag-bg);
+  border: 1px solid var(--accent-tag-border);
+  border-radius: 8px;
+  padding: 0.45rem 1.1rem;
+  cursor: pointer;
+  margin-top: 0.75rem;
+  transition: background 0.2s, border-color 0.2s, transform 0.2s;
+}
+.show-more-btn:hover {
+  background: var(--accent-tag-hover-bg);
+  border-color: var(--accent-tag-hover-border);
+  transform: translateX(4px);
+}
+
+.card-more {
+  margin-top: auto;
+  align-self: flex-start;
 }
 
 /* Scroll animations driven by JS (Apple-style) */

@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=Lora:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=15" />
+  <link rel="stylesheet" href="styles.css?v=18" />
 </head>
 <body>
   <!-- Floating Navbar -->
@@ -79,7 +79,7 @@
         <div class="cv-date">2024 &ndash; 2026</div>
         <div class="cv-body">
           <div class="cv-title">A Levels</div>
-          <div class="cv-desc">GPA 3.97 &nbsp;&middot;&nbsp; IELTS 8.0</div>
+          <div class="cv-desc">GPA 3.97 &nbsp;&middot;&nbsp; IELTS 8.0 &nbsp;&middot;&nbsp; Student Council &nbsp;&middot;&nbsp; Debate Club</div>
           <div class="tag-row">
             <span class="tag">Economics</span>
             <span class="tag">Mathematics</span>
@@ -89,23 +89,26 @@
         </div>
       </div>
 
-      <div class="cv-row">
-        <div class="cv-date">2022 &ndash; 2024</div>
-        <div class="cv-body">
-          <div class="cv-title">IGCSE</div>
-          <div class="cv-desc">7A* 1A</div>
-          <div class="tag-row">
-            <span class="tag">Economics</span>
-            <span class="tag">Mathematics</span>
-            <span class="tag">Additional Mathematics</span>
-            <span class="tag">Biology</span>
-            <span class="tag">Physics</span>
-            <span class="tag">Chemistry</span>
-            <span class="tag">Chinese</span>
-            <span class="tag">ESL</span>
+      <div class="collapse-wrap" id="edu-more">
+        <div class="cv-row">
+          <div class="cv-date">2022 &ndash; 2024</div>
+          <div class="cv-body">
+            <div class="cv-title">IGCSE</div>
+            <div class="cv-desc">7A* 1A &nbsp;&middot;&nbsp; Prefectorial Board &nbsp;&middot;&nbsp; Eco Club</div>
+            <div class="tag-row">
+              <span class="tag">Economics</span>
+              <span class="tag">Mathematics</span>
+              <span class="tag">Additional Mathematics</span>
+              <span class="tag">Biology</span>
+              <span class="tag">Physics</span>
+              <span class="tag">Chemistry</span>
+              <span class="tag">Chinese</span>
+              <span class="tag">ESL</span>
+            </div>
           </div>
         </div>
       </div>
+      <button class="show-more-btn" data-target="edu-more">Show more ↓</button>
 
     </div>
   </section>
@@ -124,20 +127,23 @@
         <div class="cv-body">
           <div class="cv-title">Debate Club</div>
           <div class="cv-desc">Active member and Treasurer (2024–2025). Participated in 15+ debate tournaments. Selected to the Thailand National Team Pool after ranking top 10 in national tournaments.</div>
-          <div class="highlight-box">
-            <span class="highlight-label">2026</span>
-            <div>
-              <div class="highlight-title">TWSDC Grand Champion</div>
-              <div class="highlight-desc">Winner of the annual WSDC format debate championship in Thailand — undefeated across all 8 rounds. Top 15 Best Speaker &middot; 5th Best Reply Speaker.</div>
+          <div class="collapse-wrap" id="debate-more">
+            <div class="highlight-box">
+              <span class="highlight-label">2026</span>
+              <div>
+                <div class="highlight-title">TWSDC Grand Champion</div>
+                <div class="highlight-desc">Winner of the annual WSDC format debate championship in Thailand — undefeated across all 8 rounds. Top 15 Best Speaker &middot; 5th Best Reply Speaker.</div>
+              </div>
+            </div>
+            <div class="highlight-box">
+              <span class="highlight-label">2025</span>
+              <div>
+                <div class="highlight-title">THSDC Grand Finalist</div>
+                <div class="highlight-desc">Grand Finalist at the Thailand High School Debating Championship (THSDC) &middot; 8th Best Speaker.</div>
+              </div>
             </div>
           </div>
-          <div class="highlight-box">
-            <span class="highlight-label">2025</span>
-            <div>
-              <div class="highlight-title">THSDC Grand Finalist</div>
-              <div class="highlight-desc">Grand Finalist at the Thailand High School Debating Championship (THSDC) &middot; 8th Best Speaker.</div>
-            </div>
-          </div>
+          <button class="show-more-btn" data-target="debate-more">Show achievements ↓</button>
         </div>
       </div>
 
@@ -149,24 +155,27 @@
         </div>
       </div>
 
-      <div class="cv-row">
-        <div class="cv-date">Feb &ndash; Jun 2025</div>
-        <div class="cv-body">
-          <div class="cv-title">Director of Finance &mdash; AWSDC (Asian World Schools Debating Championship)</div>
-          <ul class="cv-list">
-            <li>Managed THB 6M (~$200K) budget for the Asian World School's Debating Championship 2025 with 300+ participants from 10+ countries</li>
-            <li>Tracked line-item expenses, negotiated fee settlements with international teams, and optimized cash allocations in real time</li>
-          </ul>
+      <div class="collapse-wrap" id="act-more">
+        <div class="cv-row">
+          <div class="cv-date">Feb &ndash; Jun 2025</div>
+          <div class="cv-body">
+            <div class="cv-title">Director of Finance &mdash; AWSDC (Asian World Schools Debating Championship)</div>
+            <ul class="cv-list">
+              <li>Managed THB 6M (~$200K) budget for the Asian World School's Debating Championship 2025 with 300+ participants from 10+ countries</li>
+              <li>Tracked line-item expenses, negotiated fee settlements with international teams, and optimized cash allocations in real time</li>
+            </ul>
+          </div>
         </div>
-      </div>
 
-      <div class="cv-row">
-        <div class="cv-date">2024 &ndash; 2025</div>
-        <div class="cv-body">
-          <div class="cv-title">Student Council</div>
-          <div class="cv-desc">Led budgeting and financial planning for school-wide events, supporting initiatives across a student body of 200. Coordinated with staff and student representatives to allocate funds and drive community projects.</div>
+        <div class="cv-row">
+          <div class="cv-date">2024 &ndash; 2025</div>
+          <div class="cv-body">
+            <div class="cv-title">Student Council</div>
+            <div class="cv-desc">Led budgeting and financial planning for school-wide events, supporting initiatives across a student body of 200. Coordinated with staff and student representatives to allocate funds and drive community projects.</div>
+          </div>
         </div>
       </div>
+      <button class="show-more-btn" data-target="act-more">Show more ↓</button>
 
     </div>
   </section>
@@ -184,24 +193,26 @@
         <div class="card bento-half">
           <div class="card-eyebrow">Essay Competition</div>
           <div class="card-title">John Locke Institute Essay</div>
-          <div class="card-desc">Explored the question: What will be the effect on socio-economic mobility of the UK government's plan to impose value-added tax on school fees? Analysed the distributional impact of the policy on access to private education and its downstream consequences for social mobility.</div>
+          <div class="card-desc collapse-text" id="proj1-desc">Explored the effect of the UK government's plan to impose VAT on private school fees on socio-economic mobility. Applied tax incidence analysis to evaluate the distributional burden across income groups, concluding that the policy is likely regressive — disproportionately affecting middle-income families while having limited impact on wealthier households.</div>
           <div class="tag-row">
             <span class="tag">Policy Analysis</span>
             <span class="tag">Economics</span>
             <span class="tag">Essay</span>
           </div>
+          <button class="show-more-btn card-more" data-target="proj1-desc">Read more ↓</button>
         </div>
 
         <div class="card bento-half">
           <div class="card-eyebrow">Independent Research</div>
           <div class="card-title">Root Causes of Underdevelopment</div>
-          <div class="card-desc">Examined the persistence of underdevelopment through colonial institutional legacy, applying the Solow and Romer models to show how extractive institutions constrain growth. Extended the analysis to critique foreign aid dependency as a barrier to sustained development.</div>
+          <div class="card-desc collapse-text" id="proj2-desc">Examined the persistence of underdevelopment through colonial institutional legacy, applying the Solow and Romer models to show how extractive institutions constrain growth. Extended the analysis to critique foreign aid dependency as a barrier to sustained development.</div>
           <div class="tag-row">
             <span class="tag">Growth Theory</span>
             <span class="tag">Solow Model</span>
             <span class="tag">Romer Model</span>
             <span class="tag">Development</span>
           </div>
+          <button class="show-more-btn card-more" data-target="proj2-desc">Read more ↓</button>
         </div>
 
       </div>
@@ -216,13 +227,14 @@
         <h2 class="section-title">Blog</h2>
         <div class="section-line"></div>
       </div>
+      <p class="about-text" style="margin-bottom: 1.5rem;">Sharing things I find interesting — economics, policy, ideas, and more.</p>
       <div class="blog-grid">
 
         <a href="posts/sample-post.html" class="blog-card">
           <div class="blog-date">April 2026</div>
           <div class="blog-title">Coming Soon</div>
           <div class="blog-excerpt">First blog post is on its way. Stay tuned for thoughts on economics, policy, and more.</div>
-          <div class="blog-read">Read more →</div>
+          <span class="blog-btn">Read post →</span>
         </a>
 
       </div>
@@ -285,6 +297,6 @@
     </div>
   </footer>
 
-  <script src="script.js?v=7"></script>
+  <script src="script.js?v=8"></script>
 </body>
 </html>

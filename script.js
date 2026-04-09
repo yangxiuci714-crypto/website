@@ -95,6 +95,33 @@ const sectionObserver = new IntersectionObserver((entries) => {
 
 sections.forEach(s => sectionObserver.observe(s));
 
+/* ===== Show more / collapse toggle ===== */
+document.querySelectorAll('.show-more-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const target = document.getElementById(btn.dataset.target);
+    const isExpanded = target.classList.contains('expanded');
+
+    if (isExpanded) {
+      target.style.maxHeight = target.scrollHeight + 'px';
+      requestAnimationFrame(() => {
+        target.style.maxHeight = '0';
+      });
+      target.classList.remove('expanded');
+      btn.textContent = btn.textContent.includes('Read') ? 'Read more ↓' : 'Show more ↓';
+    } else {
+      target.classList.add('expanded');
+      target.style.maxHeight = target.scrollHeight + 'px';
+      target.addEventListener('transitionend', function handler() {
+        if (target.classList.contains('expanded')) {
+          target.style.maxHeight = 'none';
+        }
+        target.removeEventListener('transitionend', handler);
+      });
+      btn.textContent = btn.textContent.includes('Read') ? 'Show less ↑' : 'Show less ↑';
+    }
+  });
+});
+
 /* ===== Theme toggle ===== */
 const toggle = document.querySelector('.theme-toggle');
 const root   = document.documentElement;
