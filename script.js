@@ -95,6 +95,14 @@ const sectionObserver = new IntersectionObserver((entries) => {
 
 sections.forEach(s => sectionObserver.observe(s));
 
+/* ===== Back to top button ===== */
+const backToTop = document.querySelector('.back-to-top');
+if (backToTop) {
+  window.addEventListener('scroll', () => {
+    backToTop.classList.toggle('visible', window.scrollY > 400);
+  }, { passive: true });
+}
+
 /* ===== Show more / collapse toggle ===== */
 document.querySelectorAll('.show-more-btn').forEach(btn => {
   btn.addEventListener('click', () => {

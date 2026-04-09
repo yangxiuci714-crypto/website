@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>404 — Xiuci Yang</title>
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=Lora:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css?v=18" />
+  <style>
+    .error-page {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+    .error-code {
+      font-family: var(--serif);
+      font-size: clamp(4rem, 12vw, 8rem);
+      font-weight: 400;
+      background: var(--name-grad);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.1;
+    }
+    .error-msg {
+      font-size: 15px;
+      color: var(--muted);
+      margin: 1rem 0 2rem;
+    }
+    .error-link {
+      display: inline-block;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--accent);
+      background: var(--accent-tag-bg);
+      border: 1px solid var(--accent-tag-border);
+      border-radius: 8px;
+      padding: 0.55rem 1.3rem;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .error-link:hover {
+      background: var(--accent-tag-hover-bg);
+      border-color: var(--accent-tag-hover-border);
+      color: var(--accent);
+    }
+  </style>
+</head>
+<body>
+  <div class="error-page">
+    <div>
+      <div class="error-code">404</div>
+      <p class="error-msg">This page doesn't exist.</p>
+      <a href="/" class="error-link">Back to home →</a>
+    </div>
+  </div>
+  <script>
+    const root = document.documentElement;
+    const saved = localStorage.getItem('theme') || 'dark';
+    root.setAttribute('data-theme', saved);
+  </script>
+</body>
+</html>
