@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Coming Soon — Xiuci Yang</title>
+  <link rel="icon" type="image/svg+xml" href="../favicon.svg" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=Lora:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles.css?v=15" />
+  <style>
+    .post-header {
+      padding: 8rem 0 2rem;
+      position: relative;
+      z-index: 2;
+    }
+    .post-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--muted);
+      margin-bottom: 2rem;
+      transition: color 0.15s;
+    }
+    .post-back:hover { color: var(--accent); }
+    .post-date {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--dim);
+      margin-bottom: 0.75rem;
+    }
+    .post-title {
+      font-family: var(--serif);
+      font-size: clamp(1.6rem, 5vw, 2.4rem);
+      font-weight: 400;
+      color: var(--text);
+      line-height: 1.25;
+      letter-spacing: -0.02em;
+    }
+    .post-body {
+      padding: 2rem 0 5rem;
+      position: relative;
+      z-index: 2;
+    }
+    .post-body p {
+      font-size: 15px;
+      color: var(--muted);
+      line-height: 1.9;
+      margin-bottom: 1.5rem;
+      max-width: 640px;
+    }
+    .post-body h2 {
+      font-family: var(--serif);
+      font-size: 1.15rem;
+      font-weight: 500;
+      color: var(--text);
+      margin: 2.5rem 0 1rem;
+    }
+    .post-body h3 {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text);
+      margin: 2rem 0 0.75rem;
+    }
+    .post-divider {
+      width: 48px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+      margin: 1.5rem 0;
+    }
+  </style>
+</head>
+<body>
+  <!-- Floating Navbar -->
+  <nav class="navbar">
+    <a href="../index.html" class="nav-logo">XY</a>
+    <a href="../index.html#about">About</a>
+    <a href="../index.html#education">Education</a>
+    <a href="../index.html#activities">Activities</a>
+    <a href="../index.html#projects">Projects</a>
+    <a href="../index.html#blog" class="active">Blog</a>
+    <a href="../index.html#social">Connect</a>
+    <button class="theme-toggle" aria-label="Toggle theme">
+      <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+    </button>
+  </nav>
+
+  <div class="container">
+    <div class="post-header">
+      <a href="../index.html#blog" class="post-back">&larr; Back to home</a>
+      <div class="post-date">April 2026</div>
+      <h1 class="post-title">Coming Soon</h1>
+      <div class="post-divider"></div>
+    </div>
+    <div class="post-body">
+      <p>This is a placeholder for the first blog post. Stay tuned for thoughts on economics, policy, development, and more.</p>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div class="footer-name">Xiuci Yang</div>
+        <p>&copy; 2026 Xiuci Yang</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme toggle (same as main page)
+    const toggle = document.querySelector('.theme-toggle');
+    const root = document.documentElement;
+    const saved = localStorage.getItem('theme') || 'dark';
+    root.setAttribute('data-theme', saved);
+    toggle.addEventListener('click', () => {
+      const current = root.getAttribute('data-theme') || 'dark';
+      const next = current === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+    });
+  </script>
+</body>
+</html>

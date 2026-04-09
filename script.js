@@ -29,6 +29,11 @@ function registerElements() {
     animEls.push({ el, delay: i * 0.07, type: 'pop' });
   });
 
+  // Blog cards
+  document.querySelectorAll('.blog-card').forEach((el, i) => {
+    animEls.push({ el, delay: i * 0.06, type: 'pop' });
+  });
+
   // Social cards slide in
   document.querySelectorAll('.social-card').forEach((el, i) => {
     animEls.push({ el, delay: i * 0.08, type: 'slide' });
