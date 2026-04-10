@@ -108,6 +108,8 @@ document.querySelectorAll('.show-more-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     const target = document.getElementById(btn.dataset.target);
     const isExpanded = target.classList.contains('expanded');
+    const preview = target.previousElementSibling;
+    const hasPreview = preview && preview.classList.contains('collapse-preview');
 
     if (isExpanded) {
       target.style.maxHeight = target.scrollHeight + 'px';
@@ -115,10 +117,12 @@ document.querySelectorAll('.show-more-btn').forEach(btn => {
         target.style.maxHeight = '0';
       });
       target.classList.remove('expanded');
+      if (hasPreview) preview.style.display = '';
       btn.textContent = btn.textContent.includes('Read') ? 'Read more ↓' : 'Show more ↓';
     } else {
       target.classList.add('expanded');
       target.style.maxHeight = target.scrollHeight + 'px';
+      if (hasPreview) preview.style.display = 'none';
       target.addEventListener('transitionend', function handler() {
         if (target.classList.contains('expanded')) {
           target.style.maxHeight = 'none';
