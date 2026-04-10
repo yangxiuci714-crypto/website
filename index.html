@@ -18,18 +18,23 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=Lora:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=24" />
+  <link rel="stylesheet" href="styles.css?v=25" />
 </head>
 <body>
   <!-- Floating Navbar -->
   <nav class="navbar">
     <a href="#hero" class="nav-logo">XY</a>
-    <a href="#about">About</a>
-    <a href="#education">Education</a>
-    <a href="#activities">Activities</a>
-    <a href="#projects">Projects</a>
-    <a href="#writing">Writing</a>
-    <a href="#contact">Contact</a>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#education">Education</a>
+      <a href="#activities">Activities</a>
+      <a href="#projects">Projects</a>
+      <a href="#blog">Blog</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <button class="nav-hamburger" aria-label="Toggle menu">
+      <span></span><span></span><span></span>
+    </button>
     <button class="theme-toggle" aria-label="Toggle theme">
       <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
       <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
@@ -50,7 +55,7 @@
           <p class="site-tagline">A-Level Economics &bull; Enthusiastic Debater &bull; Independent Researcher</p>
           <p class="site-sub">Anglo Singapore International School &mdash; Bangkok, Thailand</p>
         </div>
-        <a href="posts/tragedy-great-power-politics.html" class="hero-cta"><span class="cta-dot"></span> My First Blog →</a>
+        <a href="posts/tragedy-great-power-politics.html" class="hero-cta"><span class="cta-dot"></span> Latest Post →</a>
       </div>
     </div>
   </section>
@@ -167,28 +172,32 @@
         </div>
       </div>
 
-      <div class="cv-desc collapse-preview" style="margin-top: 0.5rem; font-size: 12px; color: var(--accent); padding-left: 0.75rem;"><strong>Director of Finance, AWSDC</strong> &middot; THB 6M budget &middot; Student Council</div>
-      <div class="collapse-wrap" id="act-more">
-        <div class="cv-row">
-          <div class="cv-date">Feb &ndash; Jun 2025</div>
-          <div class="cv-body">
-            <div class="cv-title">Director of Finance &mdash; AWSDC (Asian World Schools Debating Championship)</div>
-            <ul class="cv-list">
-              <li>Managed THB 6M (~$200K) budget for the Asian World School's Debating Championship 2025 with 300+ participants from 10+ countries</li>
-              <li>Tracked line-item expenses, negotiated fee settlements with international teams, and optimized cash allocations in real time</li>
-            </ul>
+      <div class="cv-row">
+        <div class="cv-date"></div>
+        <div class="cv-body">
+          <div class="cv-desc collapse-preview" style="margin-top: 0.5rem; font-size: 12px; color: var(--accent);"><strong>Director of Finance, AWSDC</strong> &middot; THB 6M budget &middot; Student Council</div>
+          <div class="collapse-wrap" id="act-more">
+            <div class="cv-row" style="padding: 0; border: none;">
+              <div class="cv-date">Feb &ndash; Jun 2025</div>
+              <div class="cv-body">
+                <div class="cv-title">Director of Finance &mdash; AWSDC (Asian World Schools Debating Championship)</div>
+                <ul class="cv-list">
+                  <li>Managed THB 6M (~$200K) budget for the Asian World School's Debating Championship 2025 with 300+ participants from 10+ countries</li>
+                  <li>Tracked line-item expenses, negotiated fee settlements with international teams, and optimized cash allocations in real time</li>
+                </ul>
+              </div>
+            </div>
+            <div class="cv-row" style="padding: 0; border: none;">
+              <div class="cv-date">2024 &ndash; 2025</div>
+              <div class="cv-body">
+                <div class="cv-title">Student Council</div>
+                <div class="cv-desc">Led budgeting and financial planning for school-wide events, supporting initiatives across a student body of 200. Coordinated with staff and student representatives to allocate funds and drive community projects.</div>
+              </div>
+            </div>
           </div>
-        </div>
-
-        <div class="cv-row">
-          <div class="cv-date">2024 &ndash; 2025</div>
-          <div class="cv-body">
-            <div class="cv-title">Student Council</div>
-            <div class="cv-desc">Led budgeting and financial planning for school-wide events, supporting initiatives across a student body of 200. Coordinated with staff and student representatives to allocate funds and drive community projects.</div>
-          </div>
+          <button class="show-more-btn" data-target="act-more">Show more ↓</button>
         </div>
       </div>
-      <button class="show-more-btn" data-target="act-more">Show more ↓</button>
 
     </div>
   </section>
@@ -231,15 +240,15 @@
     </div>
   </section>
 
-  <!-- Writing -->
-  <section id="writing" class="section">
+  <!-- Blog -->
+  <section id="blog" class="section">
     <div class="container">
       <div class="section-header">
         <span class="section-num">05</span>
-        <h2 class="section-title">Writing</h2>
+        <h2 class="section-title">Blog</h2>
         <div class="section-line"></div>
       </div>
-      <p class="about-text" style="margin-bottom: 1.5rem;">Sharing things I find interesting. Economics, policy, ideas, and more. More coming soon.</p>
+      <p class="about-text" style="margin-bottom: 1.5rem;">Sharing things I find interesting. Economics, policy, ideas, and more.</p>
       <div class="blog-grid">
 
         <a href="posts/tragedy-great-power-politics.html" class="blog-card">
@@ -311,6 +320,6 @@
     </div>
   </footer>
 
-  <script src="script.js?v=10"></script>
+  <script src="script.js?v=11"></script>
 </body>
 </html>

@@ -134,6 +134,22 @@ document.querySelectorAll('.show-more-btn').forEach(btn => {
   });
 });
 
+/* ===== Mobile hamburger menu ===== */
+const hamburger = document.querySelector('.nav-hamburger');
+const navLinksWrap = document.querySelector('.nav-links');
+if (hamburger && navLinksWrap) {
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
+    navLinksWrap.classList.toggle('open');
+  });
+  navLinksWrap.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      navLinksWrap.classList.remove('open');
+    });
+  });
+}
+
 /* ===== Theme toggle ===== */
 const toggle = document.querySelector('.theme-toggle');
 const root   = document.documentElement;
