@@ -18,7 +18,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=Lora:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css?v=25" />
+  <link rel="stylesheet" href="styles.css?v=26" />
 </head>
 <body>
   <!-- Floating Navbar -->
@@ -43,11 +43,13 @@
 
   <!-- Hero -->
   <section id="hero" class="hero">
+    <div class="hero-orb hero-orb-1"></div>
+    <div class="hero-orb hero-orb-2"></div>
     <div class="container">
       <div class="hero-inner">
-        <div class="status-badge">
+        <div class="status-badge" id="status-badge">
           <span class="status-dot"></span>
-          Currently studying A Levels
+          <span id="status-text">Currently studying A Levels</span>
         </div>
         <h1 class="site-name">Xiuci Yang</h1>
         <div class="hero-divider"></div>
@@ -252,9 +254,17 @@
       <div class="blog-grid">
 
         <a href="posts/tragedy-great-power-politics.html" class="blog-card">
-          <div class="blog-date">April 2026</div>
+          <div class="blog-meta">
+            <span class="blog-date">April 2026</span>
+            <span class="blog-dot">&middot;</span>
+            <span class="blog-read-time">5 min read</span>
+          </div>
           <div class="blog-title">My Thoughts on The Tragedy of Great Power Politics</div>
           <div class="blog-excerpt">How Mearsheimer's offensive realism reshaped the way I think about international relations, and why I wish I had read it before writing my personal statement.</div>
+          <div class="blog-tags">
+            <span class="blog-tag">International Relations</span>
+            <span class="blog-tag">Geopolitics</span>
+          </div>
           <span class="blog-btn">Read post →</span>
         </a>
 
@@ -294,7 +304,7 @@
           <div class="social-arrow">→</div>
         </a>
 
-        <a href="mailto:yangxiuci714@gmail.com" class="social-card">
+        <a href="mailto:yangxiuci714@gmail.com?subject=From%20xiuciyang.com" class="social-card">
           <div class="social-icon">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
           </div>
@@ -320,6 +330,6 @@
     </div>
   </footer>
 
-  <script src="script.js?v=11"></script>
+  <script src="script.js?v=12"></script>
 </body>
 </html>

@@ -5,6 +5,10 @@ function easeOutQuart(t) {
   return 1 - Math.pow(1 - t, 4);
 }
 
+// Skip animations for returning visitors within the same session
+const returningVisitor = sessionStorage.getItem('xy-visited') === '1';
+sessionStorage.setItem('xy-visited', '1');
+
 // All elements to animate — sections and their children
 const animEls = [];
 
@@ -76,8 +80,21 @@ function tick() {
   requestAnimationFrame(tick);
 }
 
+// Honor reduced-motion preference and skip animations for returning visitors
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
 registerElements();
-requestAnimationFrame(tick);
+
+if (returningVisitor || prefersReducedMotion) {
+  // Instantly reveal all elements — no scroll-driven animation
+  animEls.forEach(({ el }) => {
+    el.style.opacity = '1';
+    el.style.transform = 'none';
+    el.style.willChange = 'auto';
+  });
+} else {
+  requestAnimationFrame(tick);
+}
 
 /* ===== Floating navbar active state ===== */
 const sections  = document.querySelectorAll('section[id]');
@@ -164,3 +181,25 @@ toggle.addEventListener('click', () => {
   root.setAttribute('data-theme', next);
   localStorage.setItem('theme', next);
 });
+
+/* ===== Auto-updating status badge ===== */
+const statusText = document.getElementById('status-text');
+if (statusText) {
+  const now = new Date();
+  // A Level exams typically finish by late June in UK system
+  const aLevelsEndDate = new Date('2026-07-01');
+  // A Level results released mid-August
+  const resultsDate    = new Date('2026-08-15');
+  // University starts late September / early October
+  const universityDate = new Date('2026-09-20');
+
+  if (now >= universityDate) {
+    statusText.textContent = 'Starting university';
+  } else if (now >= resultsDate) {
+    statusText.textContent = 'A Levels completed';
+  } else if (now >= aLevelsEndDate) {
+    statusText.textContent = 'Awaiting A Level results';
+  } else {
+    statusText.textContent = 'Currently studying A Levels';
+  }
+}

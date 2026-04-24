@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500&family=Lora:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../styles.css?v=25" />
+  <link rel="stylesheet" href="../styles.css?v=26" />
   <style>
     .post-header {
       padding: 8rem 0 2rem;
@@ -99,6 +99,70 @@
       border-radius: 5px;
       padding: 0.18rem 0.55rem;
     }
+    .post-footer {
+      margin-top: 3rem;
+      padding: 2rem 0;
+      border-top: 1px solid var(--border);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .post-footer-label {
+      font-size: 10.5px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--dim);
+    }
+    .post-nav-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--accent);
+      background: var(--accent-tag-bg);
+      border: 1px solid var(--accent-tag-border);
+      border-radius: 10px;
+      padding: 0.55rem 1.1rem;
+      transition: background 0.2s, border-color 0.2s, transform 0.2s;
+    }
+    .post-nav-link:hover {
+      background: var(--accent-tag-hover-bg);
+      border-color: var(--accent-tag-hover-border);
+      transform: translateX(-3px);
+      color: var(--accent);
+    }
+    .post-share {
+      display: flex;
+      gap: 0.4rem;
+      align-items: center;
+    }
+    .post-share-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 34px;
+      height: 34px;
+      border: 1px solid var(--border2);
+      border-radius: 50%;
+      background: transparent;
+      color: var(--muted);
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s, border-color 0.15s;
+      text-decoration: none;
+    }
+    .post-share-btn:hover {
+      background: var(--accent-hover);
+      color: var(--accent);
+      border-color: var(--accent-tag-hover-border);
+    }
+    .post-share-btn svg {
+      width: 14px;
+      height: 14px;
+    }
   </style>
 </head>
 <body>
@@ -160,6 +224,22 @@
 
       <p>The theory does have clear limitations. It treats states as if they face no real barriers to aggression, but in practice there are significant constraints. The economic costs of conflict are enormous, especially between deeply interdependent economies. Domestically, leaders risk losing public support the moment a war becomes costly or unpopular. Institutions like the UN or WTO may not prevent conflict entirely, but they do raise the cost of acting aggressively. Offensive realism tends to overlook all of this. But that is exactly why reading Mearsheimer is valuable. Once you understand his argument, you can engage with liberal institutionalism (Keohane) or constructivism (Wendt) and start building a dialogue between perspectives. That is what makes you stand out in an <strong>LSE personal statement</strong> or an <strong>Oxbridge interview</strong>.</p>
 
+      <div class="post-footer">
+        <a href="../index.html#blog" class="post-nav-link">&larr; All posts</a>
+        <div class="post-share">
+          <span class="post-footer-label">Share</span>
+          <a href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fxiuciyang.com%2Fposts%2Ftragedy-great-power-politics.html&text=My%20Thoughts%20on%20The%20Tragedy%20of%20Great%20Power%20Politics" class="post-share-btn" target="_blank" rel="noopener" aria-label="Share on X">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+          <a href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fxiuciyang.com%2Fposts%2Ftragedy-great-power-politics.html" class="post-share-btn" target="_blank" rel="noopener" aria-label="Share on LinkedIn">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+          <button class="post-share-btn" id="copy-link" aria-label="Copy link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+          </button>
+        </div>
+      </div>
+
     </div>
   </div>
 
@@ -199,6 +279,21 @@
       root.setAttribute('data-theme', next);
       localStorage.setItem('theme', next);
     });
+    // Copy link button
+    const copyBtn = document.getElementById('copy-link');
+    if (copyBtn) {
+      copyBtn.addEventListener('click', () => {
+        navigator.clipboard.writeText(window.location.href).then(() => {
+          const original = copyBtn.innerHTML;
+          copyBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>';
+          copyBtn.style.color = 'var(--green)';
+          setTimeout(() => {
+            copyBtn.innerHTML = original;
+            copyBtn.style.color = '';
+          }, 1600);
+        });
+      });
+    }
   </script>
 </body>
 </html>
