@@ -186,20 +186,12 @@ toggle.addEventListener('click', () => {
 const statusText = document.getElementById('status-text');
 if (statusText) {
   const now = new Date();
-  // A Level exams typically finish by late June in UK system
-  const aLevelsEndDate = new Date('2026-07-01');
-  // A Level results released mid-August
-  const resultsDate    = new Date('2026-08-15');
-  // University starts late September / early October
-  const universityDate = new Date('2026-09-20');
+  // LSE term starts late September
+  const lseStartDate = new Date('2026-09-28');
 
-  if (now >= universityDate) {
-    statusText.textContent = 'Starting university';
-  } else if (now >= resultsDate) {
-    statusText.textContent = 'A Levels completed';
-  } else if (now >= aLevelsEndDate) {
-    statusText.textContent = 'Awaiting A Level results';
+  if (now >= lseStartDate) {
+    statusText.textContent = 'Studying at LSE';
   } else {
-    statusText.textContent = 'Currently studying A Levels';
+    statusText.textContent = 'Incoming LSE Student';
   }
 }
