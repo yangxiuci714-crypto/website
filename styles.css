@@ -476,6 +476,10 @@ a:hover { color: var(--text); }
   flex-shrink: 0;
   letter-spacing: 0.5px;
 }
+.school-icon-svg svg {
+  width: 18px;
+  height: 18px;
+}
 
 .school-name {
   font-size: 13.5px;
