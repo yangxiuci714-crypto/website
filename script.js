@@ -190,8 +190,8 @@ if (statusText) {
   const lseStartDate = new Date('2026-09-28');
 
   if (now >= lseStartDate) {
-    statusText.textContent = 'Studying at LSE';
+    statusText.textContent = 'Studying at London School of Economics';
   } else {
-    statusText.textContent = 'Incoming LSE Student';
+    statusText.textContent = 'Incoming — London School of Economics';
   }
 }
