@@ -179,7 +179,7 @@ a:hover { color: var(--text); }
   color: var(--muted);
   padding: 0.4rem 1rem;
   border-radius: 999px;
-  transition: all 0.18s;
+  transition: background 0.12s, color 0.12s, padding 0.18s;
   letter-spacing: 0.01em;
   white-space: nowrap;
   position: relative;
@@ -939,15 +939,15 @@ a:hover { color: var(--text); }
 }
 
 .collapse-text {
-  max-height: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
   overflow: hidden;
-  transition: max-height 0.4s ease, opacity 0.3s ease;
-  opacity: 0;
-  margin-bottom: 0 !important;
+  /* don't let flex stretch the clamped box when a sibling card grows */
+  flex: 0 0 auto;
 }
 .collapse-text.expanded {
-  opacity: 1;
-  margin-bottom: 0.75rem !important;
+  -webkit-line-clamp: unset;
 }
 
 .show-more-btn {

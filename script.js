@@ -100,17 +100,21 @@ if (returningVisitor || prefersReducedMotion) {
 const sections  = document.querySelectorAll('section[id]');
 const navLinks  = document.querySelectorAll('.navbar a');
 
-const sectionObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      navLinks.forEach(l => {
-        l.classList.toggle('active', l.getAttribute('href') === `#${entry.target.id}`);
-      });
-    }
+// Scroll-position based: the active section is the last one whose top has
+// crossed a probe line 35% down the viewport. More stable than an
+// IntersectionObserver for short sections, and clears correctly at the top.
+function updateActiveNav() {
+  const probe = window.scrollY + window.innerHeight * 0.35;
+  let current = null;
+  sections.forEach(s => {
+    if (s.id !== 'hero' && s.offsetTop <= probe) current = s.id;
   });
-}, { threshold: 0.3 });
-
-sections.forEach(s => sectionObserver.observe(s));
+  navLinks.forEach(l => {
+    l.classList.toggle('active', current !== null && l.getAttribute('href') === `#${current}`);
+  });
+}
+window.addEventListener('scroll', updateActiveNav, { passive: true });
+updateActiveNav();
 
 /* ===== Back to top button ===== */
 const backToTop = document.querySelector('.back-to-top');
@@ -124,6 +128,14 @@ if (backToTop) {
 document.querySelectorAll('.show-more-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     const target = document.getElementById(btn.dataset.target);
+
+    // Clamped text (project cards): just toggle the line clamp
+    if (target.classList.contains('collapse-text')) {
+      const expanded = target.classList.toggle('expanded');
+      btn.textContent = expanded ? 'Show less ↑' : 'Read more ↓';
+      return;
+    }
+
     const isExpanded = target.classList.contains('expanded');
     const preview = target.previousElementSibling;
     const hasPreview = preview && preview.classList.contains('collapse-preview');
