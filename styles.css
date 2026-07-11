@@ -531,6 +531,26 @@ a:hover { color: var(--text); }
   height: 18px;
 }
 
+/* Featured school (LSE) — subtle accent emphasis */
+.school-block-featured {
+  border-color: var(--accent-tag-hover-border);
+  background: var(--accent-tag-bg);
+  box-shadow: 0 0 28px var(--card-shadow);
+}
+
+/* Qualification rows nested under the school above */
+.school-rows {
+  margin-left: 1.15rem;
+  padding-left: 1.35rem;
+  border-left: 1px solid var(--border2);
+}
+@media (max-width: 640px) {
+  .school-rows {
+    margin-left: 0.5rem;
+    padding-left: 0.85rem;
+  }
+}
+
 .school-name {
   font-size: 13.5px;
   font-weight: 500;

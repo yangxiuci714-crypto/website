@@ -83,9 +83,13 @@ function tick() {
 // Honor reduced-motion preference and skip animations for returning visitors
 const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+// Also skip when landing mid-page (anchor link or restored scroll position),
+// so content already in view is never left invisible waiting for a scroll.
+const landedMidPage = window.location.hash !== '' || window.scrollY > 10;
+
 registerElements();
 
-if (returningVisitor || prefersReducedMotion) {
+if (returningVisitor || prefersReducedMotion || landedMidPage) {
   // Instantly reveal all elements — no scroll-driven animation
   animEls.forEach(({ el }) => {
     el.style.opacity = '1';
