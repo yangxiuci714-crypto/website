@@ -606,18 +606,7 @@ a:hover { color: var(--text); }
   margin-left: 0.15rem;
 }
 
-.incoming-badge {
-  display: inline-block;
-  font-size: 9px;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--accent);
-  background: var(--accent-tag-bg);
-  border: 1px solid var(--accent-tag-border);
-  border-radius: 4px;
-  padding: 0.1rem 0.4rem;
-  vertical-align: middle;
+.school-name .active-badge {
   margin-left: 0.4rem;
 }
 
@@ -1082,6 +1071,13 @@ a:hover { color: var(--text); }
 /* Scroll animations driven by JS (Apple-style) */
 
 /* ===== Responsive ===== */
+/* Compact nav links between the hamburger breakpoint and full desktop width */
+@media (min-width: 641px) and (max-width: 800px) {
+  .navbar a { padding: 0.4rem 0.62rem; }
+  .navbar .nav-links a.active { padding-left: 0.95rem; }
+  .nav-logo { margin-right: 0; }
+}
+
 @media (max-width: 640px) {
   .navbar {
     top: 0.75rem;

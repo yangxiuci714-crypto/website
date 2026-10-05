@@ -197,17 +197,3 @@ toggle.addEventListener('click', () => {
   root.setAttribute('data-theme', next);
   localStorage.setItem('theme', next);
 });
-
-/* ===== Auto-updating status badge ===== */
-const statusText = document.getElementById('status-text');
-if (statusText) {
-  const now = new Date();
-  // LSE term starts late September
-  const lseStartDate = new Date('2026-09-28');
-
-  if (now >= lseStartDate) {
-    statusText.textContent = 'Studying at London School of Economics';
-  } else {
-    statusText.textContent = 'Incoming — London School of Economics';
-  }
-}
