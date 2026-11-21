@@ -1,0 +1,318 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#000000">
+<title>Merry Christmas, Ophelia</title>
+<style>
+@font-face { font-family: "Cormorant Garamond"; font-style: italic; font-weight: 300; font-display: swap; src: url("fonts/cormorant-garamond-latin-300-italic.woff2") format("woff2"); }
+@font-face { font-family: "Cormorant Garamond"; font-style: italic; font-weight: 400; font-display: swap; src: url("fonts/cormorant-garamond-latin-400-italic.woff2") format("woff2"); }
+@font-face { font-family: "Cormorant Garamond"; font-style: italic; font-weight: 500; font-display: swap; src: url("fonts/cormorant-garamond-latin-500-italic.woff2") format("woff2"); }
+/* Layout: a black stage. The particle tree stands right of centre; a two-line italic
+   inscription sits on the left (top-left on phones). Deliberately a single dark look. */
+:root {
+  --night: #030204;
+  --ink: #f8eff3;
+  --ink-soft: rgba(248, 233, 240, 0.74);
+  --ink-faint: rgba(248, 233, 240, 0.34);
+  --rose-glow: rgba(243, 166, 195, 0.28);
+  --name: #f7c6d9;
+  --font-display: "Cormorant Garamond", "Iowan Old Style", "Palatino", "Book Antiqua", Georgia, serif;
+  color-scheme: dark;
+}
+html, body { height: 100%; }
+[hidden] { display: none !important; }
+body {
+  margin: 0;
+  background: var(--night);
+  color: var(--ink);
+  overflow: hidden;
+  touch-action: none;
+  -webkit-font-smoothing: antialiased;
+  font-family: var(--font-display);
+}
+#scene, #fallback {
+  position: fixed; inset: 0; width: 100%; height: 100%;
+  display: block; outline: none; cursor: grab;
+}
+#scene.dragging { cursor: grabbing; }
+#scene.over-star { cursor: pointer; }
+.inscription {
+  position: fixed;
+  left: max(16px, env(safe-area-inset-left, 0px), 8vw);
+  top: 50%;
+  transform: translateY(-64%);
+  pointer-events: none;
+  font-style: italic;
+}
+.inscription h1 {
+  margin: 0;
+  font-weight: 400;
+  font-size: clamp(36px, 4.4vw, 66px);
+  line-height: 1.04;
+  letter-spacing: 0.012em;
+  color: var(--ink);
+  text-shadow: 0 0 28px var(--rose-glow);
+  opacity: 0; filter: blur(10px);
+  transition: opacity 2.4s ease, filter 2.4s ease, letter-spacing 2.8s ease;
+}
+.inscription .name { color: var(--name); text-shadow: 0 0 22px rgba(247, 150, 190, 0.45); }
+.ready .inscription h1 { opacity: 1; filter: blur(0); letter-spacing: 0.02em; }
+/* the countdown to Christmas Day, under her name */
+.countdown {
+  display: flex; flex-wrap: wrap; gap: 0 clamp(18px, 2.1vw, 30px);
+  margin: clamp(20px, 2.5vw, 34px) 0 0 0.12em;
+  opacity: 0; filter: blur(8px);
+  transition: opacity 2.2s ease 0.9s, filter 2.2s ease 0.9s;
+}
+.countdown .unit { display: flex; flex-direction: column; }
+.countdown b {
+  font-weight: 300;
+  font-size: clamp(30px, 3vw, 46px);
+  line-height: 1;
+  color: var(--ink-soft);
+  text-shadow: 0 0 18px var(--rose-glow);
+  font-variant-numeric: lining-nums tabular-nums;
+}
+.countdown small {
+  margin-top: 0.35em;
+  font-size: clamp(13px, 1.05vw, 16px);
+  letter-spacing: 0.06em;
+  color: rgba(248, 233, 240, 0.5);
+}
+.countdown .today-line { display: none; margin: 0; font-weight: 300; font-size: clamp(24px, 2.4vw, 36px); color: var(--ink-soft); }
+.countdown.today .unit { display: none; }
+.countdown.today .today-line { display: block; }
+.ready .countdown { opacity: 1; filter: blur(0); }
+/* the star's secret takes the greeting's place, in the same hand: one line, the days still to go */
+.greeting { transition: opacity 1.4s ease 0.8s, filter 1.4s ease 0.8s; }
+.secret-open .greeting { opacity: 0; filter: blur(10px); transition-delay: 0s; }
+.secret {
+  position: absolute; left: 0; top: 50%; transform: translateY(-50%); width: max-content;
+  opacity: 0; filter: blur(10px); visibility: hidden;
+  transition: opacity 1.4s ease, filter 1.4s ease, visibility 0s linear 1.4s;
+}
+.secret-open .secret { opacity: 1; filter: blur(0); visibility: visible; transition-delay: 0.9s, 0.9s, 0s; }
+.secret-line {
+  margin: 0;
+  font-weight: 400;
+  font-size: clamp(36px, 4.4vw, 66px);
+  line-height: 1.04;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+  text-shadow: 0 0 28px var(--rose-glow);
+  font-variant-numeric: lining-nums;
+}
+
+.hint {
+  position: fixed; left: 0; right: 0; margin: 0;
+  bottom: calc(env(safe-area-inset-bottom, 0px) + 28px);
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  text-align: center;
+  font-style: italic; font-size: 15px; letter-spacing: 0.06em;
+  color: var(--ink-faint);
+  pointer-events: none;
+  opacity: 0; transition: opacity 1.6s ease;
+}
+.hint.show { opacity: 1; }
+@media (max-aspect-ratio: 9/10) {
+  .inscription {
+    top: calc(env(safe-area-inset-top, 0px) + 9vh);
+    left: max(24px, env(safe-area-inset-left, 0px));
+    transform: none;
+  }
+  .inscription h1, .secret-line { font-size: clamp(34px, 9.6vw, 54px); }
+  .countdown { gap: 0 18px; margin-top: 18px; }
+  .countdown b { font-size: clamp(27px, 7.8vw, 38px); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .inscription h1, .countdown, .hint, .greeting, .secret { transition-duration: 0.01s; transition-delay: 0s; }
+}
+</style>
+<link rel="modulepreload" href="vendor/three-0.160.0/CopyShader.js">
+<link rel="modulepreload" href="vendor/three-0.160.0/EffectComposer.js">
+<link rel="modulepreload" href="vendor/three-0.160.0/LuminosityHighPassShader.js">
+<link rel="modulepreload" href="vendor/three-0.160.0/MaskPass.js">
+<link rel="modulepreload" href="vendor/three-0.160.0/OutputPass.js">
+<link rel="modulepreload" href="vendor/three-0.160.0/OutputShader.js">
+<link rel="modulepreload" href="vendor/three-0.160.0/Pass.js">
+<link rel="modulepreload" href="vendor/three-0.160.0/RenderPass.js">
+<link rel="modulepreload" href="vendor/three-0.160.0/ShaderPass.js">
+<link rel="modulepreload" href="vendor/three-0.160.0/UnrealBloomPass.js">
+<link rel="modulepreload" href="vendor/three-0.160.0/three.module.min.js">
+</head>
+<body>
+<canvas id="scene" tabindex="0" aria-label="A pink particle Christmas tree in the dark, with the view slowly circling it while snow falls"></canvas>
+<div class="inscription">
+  <div class="greeting">
+    <h1>Merry Christmas,<br><span class="name">Ophelia</span></h1>
+    <div class="countdown" id="countdown" role="timer" aria-label="Time left until Christmas Day">
+      <span class="unit"><b id="cd-d">0</b><small id="cd-dl">days</small></span>
+      <span class="unit"><b id="cd-h">00</b><small id="cd-hl">hours</small></span>
+      <span class="unit"><b id="cd-m">00</b><small id="cd-ml">minutes</small></span>
+      <span class="unit"><b id="cd-s">00</b><small id="cd-sl">seconds</small></span>
+      <p class="today-line">Christmas is here</p>
+    </div>
+  </div>
+  <!-- the star's secret: shown when the star at the top of the tree is tapped -->
+  <div class="secret" id="secret" aria-hidden="true">
+    <p class="secret-line"><span class="name" id="secret-n">0</span><span id="secret-l"> days to go</span></p>
+  </div>
+</div>
+<p class="hint" id="hint">drag to go around &middot; pinch to zoom &middot; tap to scatter</p>
+<script>
+/* Countdown to midnight on Christmas Day in the viewer's own time zone. On the day it says so
+   instead; after it, it counts to the next one. A plain script, so it runs even if the 3D part can't. */
+(function () {
+  var box = document.getElementById('countdown');
+  if (!box) return;
+  var parts = ['d', 'h', 'm', 's'].map(function (k) { return [document.getElementById('cd-' + k), document.getElementById('cd-' + k + 'l')]; });
+  var names = [['day', 'days'], ['hour', 'hours'], ['minute', 'minutes'], ['second', 'seconds']];
+  var shown = -1, counting = null;
+  function pad(n) { return n < 10 ? '0' + n : String(n); }
+  function tick() {
+    var now = new Date(Date.now() + (window.__cdShift || 0));
+    var y = now.getFullYear(), isDay = now.getMonth() === 11 && now.getDate() === 25;
+    var goal = new Date(now >= new Date(y, 11, 26) ? y + 1 : y, 11, 25);
+    box.classList.toggle('today', isDay);
+    if (!isDay) {
+      var s = Math.max(0, Math.floor((goal - now) / 1000));
+      if (s !== shown) {
+        shown = s;
+        var v = [Math.floor(s / 86400), Math.floor(s / 3600) % 24, Math.floor(s / 60) % 60, s % 60];
+        for (var i = 0; i < 4; i++) {
+          parts[i][0].textContent = i ? pad(v[i]) : String(v[i]);
+          parts[i][1].textContent = names[i][v[i] === 1 ? 0 : 1];
+        }
+      }
+    }
+    /* the moment it turns Christmas while the page is open, the 3D scene celebrates */
+    if (counting && isDay) dispatchEvent(new Event('christmas'));
+    counting = !isDay;
+    setTimeout(tick, 1010 - (Date.now() % 1000));
+  }
+  tick();
+})();
+</script>
+<script>
+/* The star's secret: tapping the star at the top of the tree turns it into a heart and shows the days
+   left until 8 December (her own calendar), and nothing else. On the day it says "today" and opens by
+   itself. Once the day has passed the star still makes the heart, but the greeting stays put.
+   The 3D scene listens for 'secretchange'. */
+(function () {
+  var box = document.getElementById('secret');
+  if (!box) return;
+  var BACK = new Date(2026, 11, 8);
+  var num = document.getElementById('secret-n'), label = document.getElementById('secret-l');
+  var open = false, shown = null;
+  function daysLeft() {
+    var now = new Date(Date.now() + (window.__cdShift || 0));
+    return Math.round((BACK - new Date(now.getFullYear(), now.getMonth(), now.getDate())) / 864e5);
+  }
+  function render() {
+    var d = daysLeft();
+    if (d !== shown) {
+      shown = d;
+      num.textContent = d > 0 ? String(d) : 'today';
+      label.hidden = d <= 0;
+      label.textContent = d === 1 ? ' day to go' : ' days to go';
+    }
+    /* the words only take the greeting's place while there are days to count */
+    var words = open && d >= 0;
+    document.body.classList.toggle('secret-open', words);
+    box.setAttribute('aria-hidden', String(!words));
+    return d;
+  }
+  function set(v) {
+    if (v === open) return;
+    open = v;
+    render();
+    dispatchEvent(new CustomEvent('secretchange', { detail: { open: v } }));
+  }
+  window.__secret = { open: function () { set(true); }, close: function () { set(false); }, isOpen: function () { return open; } };
+  render();
+  /* on 8 December it opens without being asked: once the tree has gathered, or the moment the date
+     turns while the page is open */
+  var homeDay = daysLeft() === 0;
+  if (homeDay) setTimeout(function () { set(true); }, 9000);
+  setInterval(function () {
+    var d = render();
+    if (d === 0 && !homeDay) { homeDay = true; set(true); }
+    if (d !== 0) homeDay = false;
+  }, 1000);
+})();
+</script>
+<script>
+/* Fallback: a 2D version of the particle tree if WebGL or the 3D library can't load. */
+(function () {
+  var active = false, raf = 0, cv = null;
+  window.__stopFallback = function () {
+    if (!active) return;
+    active = false; cancelAnimationFrame(raf);
+    if (cv) cv.remove();
+    document.getElementById('scene').hidden = false;
+  };
+  function run() {
+    if (active || window.__treeReady) return;
+    active = true;
+    document.getElementById('scene').hidden = true;
+    cv = document.createElement('canvas'); cv.id = 'fallback'; document.body.prepend(cv);
+    var g = cv.getContext('2d'), W = 0, H = 0, D = Math.min(window.devicePixelRatio || 1, 2), i;
+    function size() { W = cv.width = innerWidth * D; H = cv.height = innerHeight * D; }
+    size(); addEventListener('resize', size);
+    var pts = [], snow = [];
+    for (i = 0; i < 2600; i++) {
+      var s = Math.random(), ribbon = i < 1500;
+      pts.push({ s: s, a: ribbon ? s * 6 * 6.283 : Math.random() * 6.283, k: ribbon ? 1 + (Math.random() - 0.5) * 0.12 : Math.sqrt(Math.random()), ribbon: ribbon });
+    }
+    for (i = 0; i < 220; i++) snow.push({ x: Math.random(), y: Math.random(), r: Math.random() * 1.4 + 0.4, v: Math.random() * 0.4 + 0.2 });
+    var t0 = performance.now();
+    function frame(now) {
+      var t = (now - t0) / 1000, portrait = W < H;
+      g.fillStyle = '#030204'; g.fillRect(0, 0, W, H);
+      var cx = portrait ? W * 0.5 : W * 0.64, top = H * (portrait ? 0.3 : 0.16), bot = H * 0.8;
+      var R = Math.min(W * (portrait ? 0.36 : 0.16), (bot - top) * 0.36);
+      g.globalCompositeOperation = 'lighter';
+      pts.forEach(function (p) {
+        var y = bot - p.s * (bot - top), r = (1 - p.s) * R * p.k, a = p.a + t * 0.5;
+        var x = cx + Math.cos(a) * r, z = Math.sin(a);
+        g.fillStyle = p.ribbon ? 'rgba(255,214,230,' + (0.35 + 0.25 * z) + ')' : 'rgba(240,130,170,' + (0.18 + 0.1 * z) + ')';
+        g.fillRect(x, y + z * R * 0.12, 1.4 * D, 1.4 * D);
+      });
+      /* the star, which keeps the secret here too */
+      var sr = (portrait ? 18 : 14) * D * (1 + 0.15 * Math.sin(t * 1.6)), sg = g.createRadialGradient(cx, top, 0, cx, top, sr);
+      sg.addColorStop(0, 'rgba(255,250,253,1)'); sg.addColorStop(0.15, 'rgba(255,205,225,0.55)'); sg.addColorStop(1, 'rgba(255,190,215,0)');
+      g.fillStyle = sg; g.fillRect(cx - sr, top - sr, sr * 2, sr * 2);
+      g.globalCompositeOperation = 'source-over';
+      g.fillStyle = 'rgba(255,255,255,0.7)';
+      snow.forEach(function (f) {
+        f.y += f.v * 0.0012; if (f.y > 1) f.y = 0;
+        g.beginPath(); g.arc(f.x * W, f.y * H, f.r * D, 0, 6.283); g.fill();
+      });
+      raf = requestAnimationFrame(frame);
+    }
+    raf = requestAnimationFrame(frame);
+    /* a tap on the star opens the secret; any tap closes it */
+    cv.addEventListener('click', function (e) {
+      var sec = window.__secret;
+      if (!sec) return;
+      if (sec.isOpen()) { sec.close(); return; }
+      var portrait = W < H, cx = portrait ? W * 0.5 : W * 0.64, top = H * (portrait ? 0.3 : 0.16);
+      if (Math.hypot(e.clientX * D - cx, e.clientY * D - top) < 48 * D) sec.open();
+    });
+    document.body.classList.add('ready');
+  }
+  try {
+    var probe = document.createElement('canvas');
+    if (!(probe.getContext('webgl2') || probe.getContext('webgl'))) setTimeout(run, 0);
+  } catch (e) { setTimeout(run, 0); }
+  addEventListener('error', function () { if (!window.__treeReady) setTimeout(run, 30); });
+  setTimeout(function () { if (!window.__treeReady) run(); }, 10000);
+})();
+</script>
+<script type="module" src="tree.js?v=4c705d9a"></script>
+</body>
+</html>

@@ -1,0 +1,3 @@
+three.js 0.160.0 from the npm registry (three-0.160.0.tgz, integrity checked against the registry).
+build/three.module.min.js as published; the post-processing and shader modules from
+examples/jsm/ with their imports pointed at the files in this folder. MIT licence: LICENSE.
